@@ -1,0 +1,23 @@
+﻿@model LoginViewModel
+<h1>Login here</h1>
+
+@{
+    @if (Model.ExternalProviders.Count == 0)
+    {
+        <p>no external providers configured</p>
+    }
+    else
+    {
+    <form method="post" asp-action="ExternalLogin" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl">
+        <div asp-validation-summary="All"></div>
+        @foreach (var item in Model.ExternalProviders)
+        {
+            <button class="btn btn-outline-primary" 
+                    type="submit" name="provider" 
+                    value="@item.DisplayName" 
+                    title="login using @item.DisplayName"> @item.DisplayName</button>
+        }
+    </form>
+    }
+
+}
